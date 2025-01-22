@@ -1,0 +1,3 @@
+C:/_uNIC/laba6/build/CMakeFiles/example.dir
+C:/_uNIC/laba6/build/CMakeFiles/ALL_BUILD.dir
+C:/_uNIC/laba6/build/CMakeFiles/ZERO_CHECK.dir
