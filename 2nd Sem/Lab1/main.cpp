@@ -1,211 +1,156 @@
 ﻿#include "main.h"
 #include <algorithm>
-using namespace std;
 
-bool is19(int inp)
+struct Node
 {
-	int c = 0;
-	while (inp > 0) {
-		c += inp % 10;
-		inp /= 10;
-	}
-	return c==19;
+	int data;
+	Node* prev;
+	Node* next;
+};
+
+void AddBack(Node* sent, int data)
+{
+	Node* p  = new Node;
+	p->data = data;
+	p->next = sent;
+	p->prev = sent->prev;
+	sent->prev->next = p;
+	sent->prev = p;
 }
 
-bool StEnd(int inp)
+void print(Node* sent)
 {
-	int first=10;
-	int last;
-	while (inp >= 10) {
-		if (first == 10) {
-			first = inp % 10;
-		}
-		inp /= 10;
-	}
-	last = inp;
-	return (last == first);
-}
-int fisrtNum(int inp)
-{
-	while (inp >= 10)
+	Node* p = sent->next;
+	while (p != sent)
 	{
-		inp /= 10;
+		std::cout << p->data << " ";
+		p = p->next;
 	}
-	return inp;
-}
-bool NumEnd(int inp){
-	while (inp >= 10) {
-		inp /= 10;
-	}
-	return inp == 3;
+	std::cout << std::endl;
 }
 
-int SumNums(int inp)
+void clear(Node* sent)
 {
-	int sum = 0;
-	while (inp > 0) {
-		sum += inp % 10;
-		inp /= 10;
-	}
-	return sum;
-}
-
-int No1()
-{
-	int n;
-	cin >> n;
-	int arr[10000];
-	bool DoSort = false;
-	for (int i = 0; i < n; i++) {
-		int inp;
-		cin >> inp;
-		if (is19(inp)) {
-			DoSort = true;
-		}	
-		arr[i] = inp;
-	}
-	if (!DoSort) {
-		for (int i = 0; i < n - 1; i++) {
-			for (int j = i + 1; j < n; j++) {
-				if (arr[i] < arr[j]) {
-					int tmp = arr[i];
-					arr[i] = arr[j];
-					arr[j] = tmp;
-				}
-			}
-		}
-	}
-	for (int i = 0; i < n; i++) {
-		cout << arr[i] << " ";
-	}
-	cout << endl;
-	return 0;
-}
-
-int No2()
-{
-	int n;
-	cin >> n;
-	int arr[10000];
-	int inp;
-	for (int i = 0; i < n; i++) {
-		cin >> inp;
-		arr[i] = inp;
-	}
-	for (int i = 0; i < n - 1; i++) {
-		for (int j = i + 1; j < n; j++) {
-			if (SumNums(arr[i]) > SumNums(arr[j])) {
-				swap(arr[i], arr[j]);
-			}
-			else if (fisrtNum(arr[i]) > fisrtNum(arr[j])) {
-				swap(arr[i], arr[j]);
-			}
-			else if (arr[i] > arr[j]) {
-				swap(arr[i], arr[j]);
-			}
-		}
-	}
-	for (int i = 0; i < n; i++) {
-		cout << arr[i] << " ";
-	}
-	return 0;
-}
-
-int No3()
-{
-	int n, m;
-	cin >> n >> m;
-	int arr[100][100];
-	int inp;
-	int max = numeric_limits<int>::min();
-	short numst;
-	for (int i = 0; i < n; i++) {
-		int sum = 0;
-		for (int j = 0; j < m; j++) {
-			cin >> inp;
-			sum += inp;
-			arr[i][j] = inp;
-		}
-		if (abs(sum) > max) {
-			max = abs(sum);
-			numst = i;
-		}
-	}
-	for (int i = 0; i < m; i++) {
-		arr[numst][i] = 9999;
-	}
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			cout << arr[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-	return 0;
-}
-
-int No4()
-{
-	
-	int n;
-	cin >> n;
-	int arr[6];
-	int inp;
-	int i = 0;
-	bool f = false;
-	int c = 0;
-	for (int i = 0; i < n; i++)
+	Node* p = sent->next;
+	while (p != sent)
 	{
-		cin >> inp;
-		arr[i] = inp;
+		Node* temp = p;
+		p = p->next;
+		delete temp;
 	}
+}
 
-
-	for (int i = 0; i < n; i++)
+int firstNum(int num)
+{
+	while(num >= 10)
 	{
+		num /= 10;
+	}
+	return num;
+}
 
-		if (StEnd(arr[i]))
+void swap(Node* a, Node* b)
+{
+	int temp = a->data;
+	a->data = b->data;
+	b->data = temp;
+}
+
+void Duplicate10(Node* sent)
+{
+	Node* p = sent->next;
+	while (p != sent)
+	{
+		if (p->data % 10 == 0)
 		{
-			for (int j = i; j < (n - 1); j++)
-			{
-				arr[j] = arr[j + 1];
-			}
-			n--;
-			i--;
+			Node* temp = new Node;
+			temp->data = p->data;
+			temp->next = p->next;
+			temp->prev = p;
+			p->next->prev = temp;
+			p->next = temp;
+			p = temp->next;
 		}
-		//for (int i = 0; i < n; i++)
-		//{
-		//	cout << arr[i] << " ";
-		//}
-		//cout << endl << n << endl;
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		if (NumEnd(arr[i]))
+		else
 		{
-			for (int j = (n - 1); j >= i; j--)
-			{
-				arr[j + 1] = arr[j];
-			}
-			n++;
-			i++;
+			p = p->next;
 		}
 	}
-
-	for (int i = 0; i < n; i++) 
-	{
-		cout << arr[i] << " ";
-	}
-
-	return 0;
 }
+
+void RemoveSimple(Node* sent)
+{
+	Node* p = sent->next;
+	while (p != sent)
+	{
+		if (p->data % 2 != 0)
+		{
+			Node* temp = p;
+			p->prev->next = p->next;
+			p->next->prev = p->prev;
+			p = p->prev;
+			delete temp;
+		}
+		p = p->next;	
+	}
+}
+
+int EndCount(Node* sent, int num)
+{
+	int count = 0;
+	Node* p = sent-> next;
+	while(p != sent)
+	{	
+		if((p->data)%10 == num)
+		{
+			count++;
+		}
+		p = p->next;
+	}
+	return count;
+}
+
+void SortByFirstDigit(Node* sent)
+{
+	Node* p = sent->next;
+	while(p != sent)
+	{
+		Node* q = p->next;
+		while(q != sent)
+		{
+			if(firstNum(p->data) < firstNum(q->data))
+			{
+				swap(p, q);
+			}
+			q = q->next;
+		}
+		p = p->next;
+	}
+}
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	//No1();
-	//No2();
-	//No3();
-	No4();
-	return 0;
+	Node* sent = new Node;
+	sent->next = sent;
+	sent->prev = sent;
+	int n;
+	std::cin >> n;
+	int inp;
+	for(int i = 0; i < n; i++)
+	{
+		std::cin >> inp;
+		AddBack(sent, inp);
+	}
+	std::cout << EndCount(sent, 2) << " " << EndCount(sent, 4) << std::endl;
+	if((EndCount(sent, 2) + EndCount(sent, 4)) >= 3)
+		SortByFirstDigit(sent);
+	else
+	{
+		RemoveSimple(sent);
+		Duplicate10(sent);
+	}
+	print(sent);
+	clear(sent);
+	delete sent;
 }

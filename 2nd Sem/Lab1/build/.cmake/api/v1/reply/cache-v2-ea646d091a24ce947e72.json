@@ -27,7 +27,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/_uNIC/laba6/build"
+			"value" : "c:/Labs/C-Labs/2nd Sem/Lab1/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/_uNIC/laba6/build/CMakeFiles/pkgRedirects"
+			"value" : "C:/Labs/C-Labs/2nd Sem/Lab1/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -491,7 +491,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/_uNIC/laba6"
+			"value" : "C:/Labs/C-Labs/2nd Sem/Lab1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1027,7 +1027,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/_uNIC/laba6/build"
+			"value" : "C:/Labs/C-Labs/2nd Sem/Lab1/build"
 		},
 		{
 			"name" : "example_IS_TOP_LEVEL",
@@ -1051,7 +1051,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/_uNIC/laba6"
+			"value" : "C:/Labs/C-Labs/2nd Sem/Lab1"
 		}
 	],
 	"kind" : "cache",
