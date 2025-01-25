@@ -1,7 +1,8 @@
 ﻿#include "main.h"
 #include <algorithm>
-
-
+#include <string>
+#include <chrono>
+#define _DEBUG
 
 void QuickSort(int a, int b, int* arr)
 {
@@ -30,13 +31,32 @@ void QuickSort(int a, int b, int* arr)
 
 }
 
+int StringLenght(std::string inp, int index = 0)
+{
+	if(inp[index])
+		return 1 + StringLenght(inp, index+1);
+	else
+		return 0;
+}
 
 int main()
 {
-	const int n = 10;
-	int arr[n] = {1, 5, 3, 7, 2, 4, 6, 8, 9, 0};
-	QuickSort(0, n-1, arr);
+	std::string s;
+	std::cin >> s;
+	std::cout << StringLenght(s) << std::endl;
 
+	const int n = 100000;
+	int arr[n] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 9, 3};
+#ifdef _DEBUG
+	auto begin = std::chrono::high_resolution_clock::now();
+	getchar();
+#endif
+	QuickSort(0, n-1, arr);
+#ifdef _DEBUG
+	auto end = std::chrono::high_resolution_clock::now();
+	auto elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+  	std::cout << "The time: " << elapsed_ms.count() << " ms\n";
+#endif
 	for(int i = 0; i < n; i++)
 		std::cout << arr[i] << " ";
 	return 0;
