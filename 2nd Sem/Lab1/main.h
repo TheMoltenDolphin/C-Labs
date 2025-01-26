@@ -4,6 +4,7 @@
 #pragma once
 
 #include <iostream>
-#include <list>
-
+#include <algorithm>
+#include <string>
+#include <chrono>
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
