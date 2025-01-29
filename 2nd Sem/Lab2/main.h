@@ -4,6 +4,5 @@
 #pragma once
 
 #include <iostream>
-#include <list>
-
+#include <fstream>
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
