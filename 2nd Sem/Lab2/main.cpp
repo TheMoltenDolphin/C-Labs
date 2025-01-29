@@ -132,7 +132,12 @@ int main()
 #ifdef _Sort
 	//const int n = 11;
 	const int n = 11000;
+	
+#ifdef _Sort
+	//const int n = 11;
+	const int n = 11000;
 	int arr[n] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 9, 3};
+	int arr2[n] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 9, 3};
 	int arr2[n] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 9, 3};
 #ifdef _DEBUG
 	auto begin = std::chrono::high_resolution_clock::now();
@@ -153,10 +158,23 @@ int main()
 	end = std::chrono::high_resolution_clock::now();
     elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
   	std::cout << "SwapSort time: " << elapsed_ms.count() << " ms\n";
+  	std::cout << "QuickSort time: " << elapsed_ms.count() << " ms\n";
+#endif
+
+#ifdef _DEBUG
+	begin = std::chrono::high_resolution_clock::now();
+#endif
+	SwapSort(n, arr2);
+#ifdef _DEBUG
+	end = std::chrono::high_resolution_clock::now();
+    elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+  	std::cout << "SwapSort time: " << elapsed_ms.count() << " ms\n";
 #endif
 	for(int i = 0; i < n; i++)
 		std::cout << arr[i] << " ";
 	return 0;
+
+#endif
 
 #endif
 }
