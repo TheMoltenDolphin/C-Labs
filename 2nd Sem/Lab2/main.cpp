@@ -1,7 +1,7 @@
 ﻿#include "main.h"
 #define _DEBUG
 //#define _Sort
-//#define _PathFinder
+#define _PathFinder
 
 void QuickSort(int a, int b, int* arr)
 {
@@ -45,9 +45,9 @@ void SwapSort(int n, int* arr)
 int StringLenght(std::string inp, int index = 0)
 {
 	if(inp[index])
-		return 1 + StringLenght(inp, index+1);
+		return StringLenght(inp, index+1);
 	else
-		return 0;
+		return index;
 }
 
 void PathFinder(int i, int j, int step, int n, int m, char field[100][100], int table[100][100])
@@ -61,7 +61,6 @@ void PathFinder(int i, int j, int step, int n, int m, char field[100][100], int 
 	{
 		return;
 	}
-
 	if(i+1 < n && field[i+1][j] != '#')
 	{
 		PathFinder(i+1, j, step+1, n, m, field, table);
@@ -78,8 +77,22 @@ void PathFinder(int i, int j, int step, int n, int m, char field[100][100], int 
 	{
 		PathFinder(i, j-1, step+1, n, m, field, table);
 	}
-
-
+	if(j-1 >= 0 && i-1 >= 0 && field[i-1][j-1] != '#')
+	{
+		PathFinder(i-1, j-1, step+1, n, m, field, table);
+	}
+	if(j+1 < m && i-1 >= 0 && field[i-1][j+1] != '#')
+	{
+		PathFinder(i-1, j+1, step+1, n, m, field, table);
+	}
+	if(j+1 < m && i+1 < n && field[i+1][j+1] != '#')
+	{
+		PathFinder(i+1, j+1, step+1, n, m, field, table);
+	}
+	if(j-1 >=0 && i+1 < n && field[i+1][j-1] != '#')
+	{
+		PathFinder(i+1, j-1, step+1, n, m, field, table);
+	}
 }
 
 int main()
@@ -121,7 +134,14 @@ int main()
 
 	table[is][js] = 0;
 	PathFinder(is, js, 0, n, m, field, table);
-	std::cout << table[ie][je] << std::endl;
+	if(table[ie][je] == INT_MAX)
+	{
+		std::cout << "-1";
+	}
+	else
+	{
+		std::cout << table[ie][je] << std::endl;
+	}
 #endif
 
 	std::string s;
@@ -132,12 +152,7 @@ int main()
 #ifdef _Sort
 	//const int n = 11;
 	const int n = 11000;
-	
-#ifdef _Sort
-	//const int n = 11;
-	const int n = 11000;
 	int arr[n] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 9, 3};
-	int arr2[n] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 9, 3};
 	int arr2[n] = {3, 6, 8, 10, 1, 2, 1, 5, 7, 9, 3};
 #ifdef _DEBUG
 	auto begin = std::chrono::high_resolution_clock::now();
@@ -158,23 +173,9 @@ int main()
 	end = std::chrono::high_resolution_clock::now();
     elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
   	std::cout << "SwapSort time: " << elapsed_ms.count() << " ms\n";
-  	std::cout << "QuickSort time: " << elapsed_ms.count() << " ms\n";
-#endif
-
-#ifdef _DEBUG
-	begin = std::chrono::high_resolution_clock::now();
-#endif
-	SwapSort(n, arr2);
-#ifdef _DEBUG
-	end = std::chrono::high_resolution_clock::now();
-    elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-  	std::cout << "SwapSort time: " << elapsed_ms.count() << " ms\n";
 #endif
 	for(int i = 0; i < n; i++)
 		std::cout << arr[i] << " ";
 	return 0;
-
-#endif
-
 #endif
 }

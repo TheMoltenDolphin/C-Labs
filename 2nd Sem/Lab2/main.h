@@ -5,4 +5,5 @@
 
 #include <iostream>
 #include <fstream>
+#include <chrono>
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.

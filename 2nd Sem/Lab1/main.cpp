@@ -56,6 +56,22 @@ void swap(Node* a, Node* b)
 	b->data = temp;
 }
 
+bool IsSimple(int inp)
+{
+	if(inp == 1)
+	{
+		return true;
+	}
+	for(int i = 2; i <= ((int)sqrt(inp) + 1); i++)
+	{
+		if(inp % i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void Duplicate10(Node* sent)
 {
 	Node* p = sent->next;
@@ -83,7 +99,7 @@ void RemoveSimple(Node* sent)
 	Node* p = sent->next;
 	while (p != sent)
 	{
-		if (p->data % 2 != 0)
+		if (IsSimple(p->data))
 		{
 			Node* temp = p;
 			p->prev->next = p->next;
@@ -109,6 +125,8 @@ int EndCount(Node* sent, int num)
 	}
 	return count;
 }
+
+
 
 void SortByFirstDigit(Node* sent)
 {
@@ -142,7 +160,7 @@ int main()
 		std::cin >> inp;
 		AddBack(sent, inp);
 	}
-	std::cout << EndCount(sent, 2) << " " << EndCount(sent, 4) << std::endl;
+	//std::cout << EndCount(sent, 2) << " " << EndCount(sent, 4) << std::endl;
 	if((EndCount(sent, 2) + EndCount(sent, 4)) >= 3)
 		SortByFirstDigit(sent);
 	else
