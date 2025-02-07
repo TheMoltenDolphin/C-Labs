@@ -27,11 +27,7 @@
 	"objects" : 
 	[
 		{
-<<<<<<<< HEAD:2nd Sem/Lab2/build/.cmake/api/v1/reply/index-2025-01-29T17-00-21-0645.json
-			"jsonFile" : "codemodel-v2-0faf03ef8651a3c1400f.json",
-========
-			"jsonFile" : "codemodel-v2-f1feecb547d1e6bccf6e.json",
->>>>>>>> 11d7beccbcb3efa415f87de58cee79522456473d:build/.cmake/api/v1/reply/index-2025-01-26T14-07-28-0963.json
+			"jsonFile" : "codemodel-v2-56e3b5e4bbfcfbfb2265.json",
 			"kind" : "codemodel",
 			"version" : 
 			{
@@ -40,7 +36,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-9de5e7f0ea2f3ecce374.json",
+			"jsonFile" : "cache-v2-a6b160435a11044a5f6c.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -49,7 +45,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-b5383c9ac000fff507ef.json",
+			"jsonFile" : "cmakeFiles-v1-b5c5741eb06d507add39.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -95,7 +91,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-9de5e7f0ea2f3ecce374.json",
+						"jsonFile" : "cache-v2-a6b160435a11044a5f6c.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -104,11 +100,7 @@
 						}
 					},
 					{
-<<<<<<<< HEAD:2nd Sem/Lab2/build/.cmake/api/v1/reply/index-2025-01-29T17-00-21-0645.json
-						"jsonFile" : "codemodel-v2-0faf03ef8651a3c1400f.json",
-========
-						"jsonFile" : "codemodel-v2-f1feecb547d1e6bccf6e.json",
->>>>>>>> 11d7beccbcb3efa415f87de58cee79522456473d:build/.cmake/api/v1/reply/index-2025-01-26T14-07-28-0963.json
+						"jsonFile" : "codemodel-v2-56e3b5e4bbfcfbfb2265.json",
 						"kind" : "codemodel",
 						"version" : 
 						{
@@ -126,7 +118,7 @@
 						}
 					},
 					{
-						"jsonFile" : "cmakeFiles-v1-b5383c9ac000fff507ef.json",
+						"jsonFile" : "cmakeFiles-v1-b5c5741eb06d507add39.json",
 						"kind" : "cmakeFiles",
 						"version" : 
 						{

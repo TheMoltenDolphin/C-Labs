@@ -12,11 +12,11 @@ class parallelepiped
 			a = _a;
 			b = _b;
 			c = _c;
-			std::cout << "parallelepiped created" << std::endl;
+			//std::cout << "parallelepiped created" << std::endl;
 		}
 		~parallelepiped()
 		{
-			std::cout << "parallelepiped destroyed" << std::endl;
+			//std::cout << "parallelepiped destroyed" << std::endl;
 		}
 		double GetVolume()
 		{
@@ -26,7 +26,7 @@ class parallelepiped
 		{
 			return a*b;
 		}
-		double diagonal()
+		double GetDiagonal()
 		{
 			return sqrt(a*a + b*b + c*c);
 		}
@@ -35,12 +35,20 @@ class parallelepiped
 
 int main()
 {
-	int a, b, c;
+
+	double a, b, c;
 	std::cout << "Enter a, b, c: ";
 	std::cin >> a >> b >> c;
-	parallelepiped figure(a, b, c);
-	std::cout << "Volume: " << figure.GetVolume() << std::endl;
-	std::cout << "Area: " << figure.GetArea() << std::endl;
-	std::cout << "Diagonal: " << figure.diagonal() << std::endl;
+	parallelepiped figure1(a, b, c);
+
+	double a1, b1, c1;
+	std::cout << "Enter a, b, c: ";
+	std::cin >> a1 >> b1 >> c1;
+	parallelepiped figure2(a1, b1, c1);
+
+	std::cout << "volume 1 " << (figure1.GetVolume() < figure2.GetVolume() ? "<" : (figure1.GetVolume() > figure2.GetVolume() ? ">" : "=")) << " volume 2" << std::endl; 
+	std::cout << "area 1  " << (figure1.GetArea() < figure2.GetArea() ? "<" : (figure1.GetArea() > figure2.GetArea() ? ">" : "=")) << " area 2" << std::endl; 
+	std::cout << "diagonal 1 " << (figure1.GetDiagonal() < figure2.GetDiagonal() ? "<" : (figure1.GetDiagonal() > figure2.GetDiagonal() ? ">" : "=")) << " area 2" << std::endl; 
+
 	return 0;	
 }
