@@ -104,14 +104,17 @@ class BigInt
 
 		bool operator<(BigInt& other)
 		{			
-			(m_size < other.m_size) ? true : ((m_size > other.m_size) ? false : (void)0);
-			for(int i = 0; i < m_size; i++)
-			{
-				if (m_nums[i] < other.m_nums[i])
+			int IsTrue = (m_size < other.m_size) ?  1 : ((m_size > other.m_size) ? 2 : 3);
+			if (IsTrue == 1)
+				return true;
+			if (IsTrue == 3)
+				for(int i = 0; i < m_size; i++)
 				{
-					return true;
+					if (m_nums[i] < other.m_nums[i])
+					{
+						return true;
+					}
 				}
-			}
 			return false;
 		}
 
@@ -153,13 +156,13 @@ class BigInt
 		friend std::ostream& operator << (std::ostream &os, const BigInt &migint);
 		friend std::istream& operator >> (std::istream &in, BigInt &migint);
 
-		int m_size;
-		//std::string m_inp;
-		int* m_nums;
+
 
 	private:
 
-
+		int m_size;
+		//std::string m_inp;
+		int* m_nums;
 		void swap(BigInt& a, BigInt& b)
 		{
 			std::swap(a.m_size, b.m_size);
@@ -174,7 +177,6 @@ std::ostream& operator << (std::ostream &os, const BigInt &migint)
 	{
 		os << migint.m_nums[i];
 	}
-	os << std::endl;
 	return os;
 }
 

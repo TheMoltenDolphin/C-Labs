@@ -25,9 +25,11 @@ int main()
 	// BigInt i5 = i3+i4;
 	// std::cout << i5;
 
-	BigInt i7 = "1";
-	BigInt i8 = "1135";
+	BigInt i7 = "121";
+	BigInt i8 = "121";
 	BigInt i6 = i7*i8;
+	std:: cout << i6 << std::endl;
+	std::cout << i7 << " " << i8 << std::endl;
 	std::cout << (i7==i8);
 	std::cout << (i7>i8);
 	std::cout << (i7<i8);
