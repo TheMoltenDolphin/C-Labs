@@ -3,31 +3,23 @@
 //#define Debug
 
 
-std::string IntToStr(int* inp, int n)
-{
-	std::string out = "";
-	for(int i = 0; i < n; i++)
-	{
-		out += std::to_string(inp[i]);
-	}
-	return out;
-}
-
 int main()
 {
 
 	BigInt i  = "1001204907898561904732";
 	BigInt i2 = i;
-	BigInt i3 = "9978564679809";
+	BigInt i3 = "99999123999";
 	BigInt i4 = "99999999";
 	//i2 = i;
-	//std:: cout << (i3+i4);
-	// BigInt i5 = i3+i4;
-	// std::cout << i5;
+	std::cout << (i3+i4) << std::endl;
+	i3 += i4;
+	std::cout << i3 << std::endl;
 
-	BigInt i7 = "121";
-	BigInt i8 = "121";
+	BigInt i7 = "123";
+	BigInt i8 = "456";
 	BigInt i6 = i7*i8;
+	std:: cout << i6 << std::endl;
+	i6 *= i7;
 	std:: cout << i6 << std::endl;
 	std::cout << i7 << " " << i8 << std::endl;
 	std::cout << (i7==i8);
@@ -35,6 +27,10 @@ int main()
 	std::cout << (i7<i8);
 	std::cout << (i7!=i8);
 
+
+	BigInt i9;
+	//std::cin >> i9;
+	//std::cout << i9;
 	//i3 += i4;
 	//std::cout<< i3;
 	//std::cin>>i3;

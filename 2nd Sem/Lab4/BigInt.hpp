@@ -8,18 +8,14 @@ class BigInt
 		BigInt()
 		{
 			m_size = 0;
-			//m_inp = "";
 			m_nums = nullptr;
-			std::cout << "Empty constructor" << std::endl;
 		}
 
 		BigInt(std::string inp)
-		: m_size(inp.length()), m_nums(new int[m_size])
+		: m_size(inp.length()), m_nums(new short[m_size])
 		{
-			for(int i = 0; i < m_size; i++)
-			{
+			for(short i = 0; i < m_size; i++)
 				m_nums[i] = inp[i]-48;
-			}
 		}
 
 		BigInt(const BigInt& tmp) : BigInt(IntToStr(tmp.m_nums, tmp.m_size)) {}
@@ -32,35 +28,24 @@ class BigInt
 
 		BigInt operator+(const BigInt& other)
 		{
-			int size = std::max(m_size, other.m_size)+1;
-			int* res = new int[size] {0};
-			int mini = std::min(m_size, other.m_size);
+			short size = std::max(m_size, other.m_size)+1;
+			short* res = new short[size] {0};
+			short mini = std::min(m_size, other.m_size);
 
-			for(int i = 0; i < mini; i++)
+			for(short i = 0; i < mini; i++)
 			{
-				int tmp = m_nums[m_size-i-1] + other.m_nums[other.m_size-i-1];
+				short tmp = m_nums[m_size-i-1] + other.m_nums[other.m_size-i-1];
 				res[size-i-1] += tmp % 10;
 				res[size-i-2] += tmp / 10;
 			}
 			if (m_size > other.m_size)
-			{
-				for(int i = mini; i < size; i++)
-				{
-					res[size-i] = m_nums[i];
-				}
-			}
+				for(short i = mini; i < size; i++)
+					res[size-i] = m_nums[size-i];
+	
 			else if (m_size < other.m_size)
-			{
-				for(int i = mini; i < size; i++)
-				{
+				for(short i = mini; i < size; i++)
 					res[size-i] = other.m_nums[size-i];
-
-				}
-			}
-			// for(int i = 0; i < size; i++)
-			// {
-			// 	std::cout << res[i];
-			// }
+		
 			BigInt result = IntToStr(res, size);
 			delete[] res;
 			return result;
@@ -75,22 +60,16 @@ class BigInt
 		
 		BigInt operator*(const BigInt& other)
 		{
-			int size = m_size + other.m_size;
-			int mini = std::min(m_size, other.m_size);
-			int* res = new int[size] {0};
+			short size = m_size + other.m_size;
+			short mini = std::min(m_size, other.m_size);
+			short* res = new short[size] {0};
 			for(int i = 0; i < m_size; i++)
-			{
 				for(int j = 0; j < other.m_size; j++)
 				{
 					res[size-i-j-1] += m_nums[m_size-i-1] * other.m_nums[other.m_size-j-1];
 					res[size-i-j-2] += res[size-i-j-1] / 10;
 					res[size-i-j-1] %= 10;
 				}
-			}
-			// for(int i = 0; i < size; i++)
-			// {
-			// 	std::cout << res[i];
-			// }
 			BigInt result = IntToStr(res, size);
 			delete[] res;
 			return result;
@@ -104,17 +83,13 @@ class BigInt
 
 		bool operator<(BigInt& other)
 		{			
-			int IsTrue = (m_size < other.m_size) ?  1 : ((m_size > other.m_size) ? 2 : 3);
+			unsigned short IsTrue = ((m_size < other.m_size) * !(m_size > other.m_size) == 1 ? 1 : 2);
 			if (IsTrue == 1)
 				return true;
-			if (IsTrue == 3)
-				for(int i = 0; i < m_size; i++)
-				{
+			if (IsTrue == 2)
+				for(short i = 0; i < m_size; i++)
 					if (m_nums[i] < other.m_nums[i])
-					{
 						return true;
-					}
-				}
 			return false;
 		}
 
@@ -139,10 +114,10 @@ class BigInt
 				delete[] m_nums;
 		}
 
-		std::string IntToStr(int* inp, int n)
+		std::string IntToStr(short* inp, short n)
 		{
 			std::string out = "";
-			for(int i = 0; i < n; i++)
+			for(short i = 0; i < n; i++)
 			{
 				out += std::to_string(inp[i]);
 			}
@@ -156,13 +131,12 @@ class BigInt
 		friend std::ostream& operator << (std::ostream &os, const BigInt &migint);
 		friend std::istream& operator >> (std::istream &in, BigInt &migint);
 
-
-
 	private:
 
-		int m_size;
+		short m_size;
 		//std::string m_inp;
-		int* m_nums;
+		short* m_nums;
+
 		void swap(BigInt& a, BigInt& b)
 		{
 			std::swap(a.m_size, b.m_size);
@@ -173,10 +147,8 @@ class BigInt
 
 std::ostream& operator << (std::ostream &os, const BigInt &migint)
 {
-	for(int i = 0; i < migint.m_size; i++)
-	{
+	for(short i = 0; i < migint.m_size; i++)
 		os << migint.m_nums[i];
-	}
 	return os;
 }
 
@@ -186,17 +158,12 @@ std::istream& operator >> (std::istream &in, BigInt &migint)
 	in >> inp;
 	if(migint.m_nums == nullptr)
 	{
-		
-		migint.m_size = inp.length()+1;
-		migint.m_nums = new int[migint.m_size];
-		for(int i = 0; i < migint.m_size; i++)
-		{
+		migint.m_size = inp.length();
+		migint.m_nums = new short[migint.m_size];
+		for(short i = 0; i < migint.m_size; i++)
 			migint.m_nums[i] = inp[i]-48;
-		}
 	}
 	else
-	{
 		std::cerr << "Object is not empty!";
-	}
 	return in;
 }

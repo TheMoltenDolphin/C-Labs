@@ -48,7 +48,7 @@ int main()
 
 	std::cout << "volume 1 " << (figure1.GetVolume() < figure2.GetVolume() ? "<" : (figure1.GetVolume() > figure2.GetVolume() ? ">" : "=")) << " volume 2" << std::endl; 
 	std::cout << "area 1  " << (figure1.GetArea() < figure2.GetArea() ? "<" : (figure1.GetArea() > figure2.GetArea() ? ">" : "=")) << " area 2" << std::endl; 
-	std::cout << "diagonal 1 " << (figure1.GetDiagonal() < figure2.GetDiagonal() ? "<" : (figure1.GetDiagonal() > figure2.GetDiagonal() ? ">" : "=")) << " area 2" << std::endl; 
+	std::cout << "diagonal 1 " << (figure1.GetDiagonal() < figure2.GetDiagonal() ? "<" : (figure1.GetDiagonal() > figure2.GetDiagonal() ? ">" : "=")) << " diagonal 2" << std::endl; 
 
 	return 0;	
 }
