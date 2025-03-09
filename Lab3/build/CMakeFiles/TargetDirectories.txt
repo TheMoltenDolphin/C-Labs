@@ -1,3 +1,0 @@
-C:/Users/IDSokotukhin/Desktop/Новая папка/2nd Sem/Lab3/build/CMakeFiles/example.dir
-C:/Users/IDSokotukhin/Desktop/Новая папка/2nd Sem/Lab3/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/IDSokotukhin/Desktop/Новая папка/2nd Sem/Lab3/build/CMakeFiles/ZERO_CHECK.dir
