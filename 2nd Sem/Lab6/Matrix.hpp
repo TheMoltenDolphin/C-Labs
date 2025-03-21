@@ -120,11 +120,11 @@ public:
         return *this * inp;
     }
 
-    Matrix& operator++()
+    Matrix operator++(Type)
     {
-        for(int i = 0; i < m_row; i++)
+        for(size_t i = 0; i < m_row; i++)
         {
-            for(int j = 0; j < m_collum; j++)
+            for(size_t j = 0; j < m_collum; j++)
             {
                 m_elem[i][j]++;
             }
@@ -153,7 +153,7 @@ public:
         }
     }
 
-    int det()
+    Type det()
     {   
         if(m_collum == 0 || m_row == 0 || m_collum != m_row || m_elem == nullptr)
         {

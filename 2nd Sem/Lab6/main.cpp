@@ -6,10 +6,10 @@ int main()
 	setlocale(LC_ALL, "Russian");
 	Matrix<int> vec1;
 	Matrix<int> vec2(3, 3);
-
 	vec1 = vec2;
 	
 	vec2 = vec2;
+	vec2++;
 
 	for(int i = 0; i < 3; i++)
 	{
