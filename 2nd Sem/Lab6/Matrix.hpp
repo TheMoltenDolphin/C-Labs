@@ -1,25 +1,24 @@
 #include <iostream>
-template<typename Type>
+template<typename Type = int, int N = 0, int M = 0>
 class Matrix{
 
 private:
 
-    size_t m_collum;
-    size_t m_row;
     Type** m_elem;
+    size_t m_row;
+    size_t m_collum;
 
 
 public:
 
-    Matrix() : m_elem(nullptr), m_collum(0), m_row(0) {}
-
-    Matrix(size_t cols, size_t rows, Type fill_item = Type()) : m_collum(cols), m_row(rows), m_elem(new Type*[rows])
+    Matrix() : m_row(N), m_collum(M), m_elem(nullptr)
     {
+        m_elem = new Type*[m_row];
         for(size_t i = 0; i < m_row; i++)
         {
-            m_elem[i] = new Type[cols];
+            m_elem[i] = new Type[m_collum];
         }
-        fill(fill_item);
+        fill();
     }
 
     Matrix(const Matrix& inp)
@@ -45,7 +44,7 @@ public:
         if (m_elem != nullptr)
             for(size_t i = 0; i < m_row; i++)
                 delete[] m_elem[i];
-           delete[] m_elem;
+        delete[] m_elem;
     }
 
     Matrix& operator=(const Matrix& inp)
@@ -73,13 +72,24 @@ public:
         return *this;
     }
 
+    int GetRow() const
+    {
+        return m_row;
+    }
+
+    int GetCollum() const
+    {
+        return m_collum;
+    }
+
+    Type** GetElem()
+    {
+        return m_elem;
+    }
+
+
     Matrix operator+(const Matrix& inp)
     {
-        if (m_row != inp.m_row || m_collum != inp.m_collum)
-        {
-            std::cout << "Матрицы разных размеров" << std::endl;
-            return *this;
-        }
         for(size_t i = 0; i < m_row; i++)
         {
             for(size_t j = 0; j < m_collum; j++)
@@ -95,24 +105,30 @@ public:
         return *this + inp;
     }
 
-    Matrix operator*(const Matrix& inp)
+    template<int P>
+    Matrix<Type, N, P> operator*(Matrix<Type, M, P>& inp)
     {
-        if(m_collum != inp.m_row)
+        Matrix<Type, N, P> result;
+        for(size_t i = 0; i < N; i++)
         {
-            return *this;
-        }
-        for(size_t i = 0; i < m_row; i++)
-        {
-            for(size_t j = 0; j < inp.m_collum; j++)
+            for(size_t j = 0; j < P; j++)
             {
-                m_elem[i][j] = 0;
-                for(size_t k = 0; k < m_collum; k++)
+                result.GetElem()[i][j] = 0;
+                for(size_t k = 0; k < M; k++)
                 {
-                    m_elem[i][j] += m_elem[i][k] * inp.m_elem[k][j];
+                    result.GetElem()[i][j] += m_elem[i][k] * inp.GetElem()[k][j];
                 }
             }
         }
-        return *this;
+        for(int i = 0; i < 2; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+                std::cout << result[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+        return result;
     }
 
     Matrix& operator*=(const Matrix& inp)
@@ -132,7 +148,7 @@ public:
         return *this;
     }
 
-    void fill(Type value)
+    void fill(Type value = Type())
     {
         if(m_row == 0 || m_collum == 0)
             return;
@@ -152,13 +168,10 @@ public:
             }
         }
     }
-
+    
+    template<int P = N, typename std::enable_if<P == M && P != 0 && P < 4, int>::type = 0>
     Type det()
     {   
-        if(m_collum == 0 || m_row == 0 || m_collum != m_row || m_elem == nullptr)
-        {
-            return -1;
-        }
         if(m_collum == 1)
         {
             return m_elem[0][0];
