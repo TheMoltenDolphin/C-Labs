@@ -69,19 +69,19 @@ void ShowMoves(figure &inp, char board[8][8], bool NeedToChange = false)
     }
     if(type == 'R')
     {
-        int toremove[4] = {1, 1, 1, 1};
+        bool toremove[4] = {false};
         for(int i = 1; i < 8 ; i++)
         {
             char cells[4] = {board[inp.y][inp.x - i], board[inp.y][inp.x + i], board[inp.y - i][inp.x], board[inp.y + i][inp.x]};
-            int cellsX[4] = {(inp.x - i)*toremove[0], (inp.x + i)*toremove[1], inp.x*toremove[2], inp.x*toremove[3]};
-            int cellsY[4] = {inp.y*toremove[0], inp.y*toremove[0], (inp.y - i)*toremove[2], (inp.y + i)*toremove[3]};
+            int cellsX[4] = {(inp.x - i), (inp.x + i), inp.x, inp.x};
+            int cellsY[4] = {inp.y, inp.y, (inp.y - i), (inp.y + i)};
             for(int j = 0; j < 4; j++)
             {
-                if(cellsX[j] < 0 || cellsY[j] < 0 || cellsX[j] > 7 || cellsY[j] > 7)
+                if(cellsX[j] < 0 || cellsY[j] < 0 || cellsX[j] > 7 || cellsY[j] > 7 || toremove[j])
                     continue;
                 if(board[cellsY[j]][cellsX[j]] == enemy)
                 {
-                    toremove[j] = -1;
+                    toremove[j] = true;
                     continue;
                 }
                 if(cells[j] == ' ')
@@ -93,12 +93,13 @@ void ShowMoves(figure &inp, char board[8][8], bool NeedToChange = false)
                 {
                     circle.setPosition(128*(cellsX[j])+64, 128*(cellsY[j])+64);
                     inp.moves.push_back(circle);
-                    toremove[j] = -1;
+                    toremove[j] = true;
+                    continue;
                 }
                 else
                 {
-                    toremove[j] = -1;
-                    break;
+                    toremove[j] = true;
+                    continue;
                 }
             }
         }

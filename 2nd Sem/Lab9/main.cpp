@@ -44,7 +44,7 @@ int main()
 
     sf::Event event;
     sf::Vector2i MousePos;
-    figure& current = figures[0];
+    figure& current = figure();
 #ifdef FPS_COUNT
     sf::Clock clock;
 #endif
