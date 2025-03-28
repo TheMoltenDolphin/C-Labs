@@ -16,14 +16,14 @@ int main()
     std::map<char, sf::Texture> dict;
     SetDict(dict);
     char board[8][8] = {
-        {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
+        {'r', 'n', 'b', 'q', ' ', 'b', 'n', 'r'},
         {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
+        {' ', ' ', ' ', ' ', ' ', ' ', 'K', ' '},
+        {' ', ' ', ' ', ' ', 'k', ' ', ' ', 'R'},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', 'n', ' ', ' ', 'N', ' ', ' '},
         {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-        {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}
+        {'R', 'N', 'B', 'Q', ' ', 'B', 'N', ' '}
     };
 
     std::vector<figure> figures;
@@ -44,7 +44,7 @@ int main()
 
     sf::Event event;
     sf::Vector2i MousePos;
-    figure current;
+    figure& current = figures[0];
 #ifdef FPS_COUNT
     sf::Clock clock;
 #endif
@@ -62,7 +62,6 @@ int main()
             {
                 for(int i = 0; i < figures.size(); i++)
                 {
-
                     if(figures[i].sprite.getGlobalBounds().contains(MousePos.x, MousePos.y))
                     {
                         if(current.x != -1)
@@ -71,6 +70,7 @@ int main()
                         }
                         BoardSquares[figures[i].x][figures[i].y].setFillColor(sf::Color(BoardSquares[figures[i].x][figures[i].y].getFillColor().r-60, BoardSquares[figures[i].x][figures[i].y].getFillColor().g-60, BoardSquares[figures[i].x][figures[i].y].getFillColor().b-60));
                         current = figures[i];
+                        ShowMoves(current, board);
                         break;
                     }
                 }
@@ -84,6 +84,8 @@ int main()
                     window.draw(BoardSquares[i][j]);
             for(int i = 0; i < figures.size(); i++)
                 window.draw(figures[i].sprite);
+            for(int i = 0; i < current.moves.size(); i++)
+                window.draw(current.moves[i]);
             window.display();
         }
 #ifdef FPS_COUNT
