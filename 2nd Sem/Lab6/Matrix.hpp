@@ -102,7 +102,8 @@ public:
 
     Matrix& operator+=(const Matrix& inp)
     {
-        return *this + inp;
+        *this = *this + inp;
+        return *this;
     }
 
     template<int P>
@@ -120,20 +121,14 @@ public:
                 }
             }
         }
-        for(int i = 0; i < 2; i++)
-        {
-            for(int j = 0; j < 5; j++)
-            {
-                std::cout << result[i][j] << " ";
-            }
-            std::cout << std::endl;
-        }
         return result;
     }
 
-    Matrix& operator*=(const Matrix& inp)
+    template<int P>
+    Matrix<Type, N, P>& operator*=(Matrix<Type, M, P>& inp)
     {
-        return *this * inp;
+        *this = *this * inp;
+        return (*this);
     }
 
     Matrix operator++(Type)
@@ -223,4 +218,3 @@ public:
         return is;
     }
 };
-
